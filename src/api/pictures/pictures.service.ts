@@ -12,13 +12,15 @@ export class PicturesService {
   ) {}
 
   async findAllPictures() {
-    return this.picturesRepository.find({ relations: ["votesList"] });
+    return this.picturesRepository.find({
+      relations: ["votesList", "commentsList"],
+    });
   }
 
   async getPicture(id: number) {
     return this.picturesRepository.find({
       where: { id },
-      relations: ["votesList"],
+      relations: ["votesList", "commentsList"],
     });
   }
 

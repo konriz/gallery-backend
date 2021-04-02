@@ -1,5 +1,6 @@
 import { BasicEntity } from "../abstract/basic.entity";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
+import { VoteEntity } from "../vote/vote.entity";
 
 @Entity()
 export class PictureEntity extends BasicEntity {
@@ -9,4 +10,6 @@ export class PictureEntity extends BasicEntity {
 
   @Column() description: string;
 
+  @OneToMany(() => VoteEntity, (voteEntity) => voteEntity.picture)
+  votesList: VoteEntity[];
 }

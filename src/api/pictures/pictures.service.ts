@@ -6,15 +6,20 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class PicturesService {
-  constructor(@InjectRepository(PictureEntity) private picturesRepository: Repository<PictureEntity>) {
-  }
+  constructor(
+    @InjectRepository(PictureEntity)
+    private picturesRepository: Repository<PictureEntity>,
+  ) {}
 
   async findAllPictures() {
-    return this.picturesRepository.find();
+    return this.picturesRepository.find({ relations: ["votesList"] });
   }
 
   async getPicture(id: number) {
-    return this.picturesRepository.find({ id });
+    return this.picturesRepository.find({
+      where: { id },
+      relations: ["votesList"],
+    });
   }
 
   async savePicture(pictureDto: PictureDto) {

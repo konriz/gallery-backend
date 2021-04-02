@@ -1,5 +1,6 @@
 export class PictureDto {
-  pictureUrl: string;
-  name: string;
-  description: string;
+  id?: number;
+  pictureUrl?: string;
+  name?: string;
+  description?: string;
 }

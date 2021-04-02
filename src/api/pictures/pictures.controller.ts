@@ -1,13 +1,18 @@
 import {
-  Body, Controller, Delete, Get, Param, Post, Put
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
 } from "@nestjs/common";
 import { PicturesService } from "./pictures.service";
 import { PictureDto } from "./dto/picture.dto";
 
 @Controller("pictures")
 export class PicturesController {
-  constructor(private readonly picturesService: PicturesService) {
-  }
+  constructor(private readonly picturesService: PicturesService) {}
 
   @Get()
   async findAllPictures() {

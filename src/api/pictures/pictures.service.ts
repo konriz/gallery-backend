@@ -3,8 +3,10 @@ import { PictureDto } from "./dto/picture.dto";
 import { PictureEntity } from "../../entity/picture/picture.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { TrackMethods } from "../../utils/track-class.decorator";
 
 @Injectable()
+@TrackMethods()
 export class PicturesService {
   constructor(
     @InjectRepository(PictureEntity)

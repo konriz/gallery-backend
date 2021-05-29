@@ -1,24 +1,31 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import * as helmet from "helmet";
+import * as session from "express-session";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const whitelist = ["http://localhost:8080"];
   const originFunction = (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      // TODO manage CORS properly!
-      callback(null, true);
-    }
+    callback(null, true);
   };
+
   const corsOptions = {
-    credentials: true, origin: originFunction
+    credentials: true,
+    origin: originFunction,
   };
   app.enableCors(corsOptions);
-  app.use(helmet({hsts: false}));
+  app.use(helmet({ hsts: false }));
+
+  const store = new session.MemoryStore();
+  const sessionOptions: session.SessionOptions = {
+    name: "app.sid",
+    secret: "my-session-secret",
+    resave: false,
+    saveUninitialized: false,
+    store
+  };
+  app.use(session(sessionOptions));
 
   await app.listen(3000);
 }

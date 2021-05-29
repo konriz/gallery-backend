@@ -5,6 +5,7 @@ import { VotesModule } from "./api/votes/votes.module";
 import { CommentsModule } from "./api/comments/comments.module";
 import { UsersModule } from "./api/users/users.module";
 import { UserRegisterModule } from "./api/user-register/user-register.module";
+import { AuthModule } from "./api/auth/auth.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UserRegisterModule } from "./api/user-register/user-register.module";
     CommentsModule,
     UsersModule,
     UserRegisterModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

@@ -6,9 +6,11 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from "@nestjs/common";
 import { VotesService } from "./votes.service";
 import { VoteDto } from "./dto/vote.dto";
+import { AuthenticatedGuard } from "../auth/authenticated-guard.service";
 
 @Controller("votes")
 export class VotesController {
@@ -25,6 +27,7 @@ export class VotesController {
   }
 
   @Post()
+  @UseGuards(AuthenticatedGuard)
   async createVote(@Body() voteDto: VoteDto) {
     return this.votesService.saveVote(voteDto);
   }

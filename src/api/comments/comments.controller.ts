@@ -6,9 +6,11 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from "@nestjs/common";
 import { CommentsService } from "./comments.service";
 import { CommentDto } from "./dto/comment.dto";
+import { AuthenticatedGuard } from "../auth/authenticated-guard.service";
 
 @Controller("comments")
 export class CommentsController {
@@ -25,6 +27,7 @@ export class CommentsController {
   }
 
   @Post()
+  @UseGuards(AuthenticatedGuard)
   async createComment(@Body() commentDto: CommentDto) {
     return this.commentsService.saveComment(commentDto);
   }

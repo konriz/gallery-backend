@@ -6,9 +6,11 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from "@nestjs/common";
 import { PicturesService } from "./pictures.service";
 import { PictureDto } from "./dto/picture.dto";
+import { AuthenticatedGuard } from "../auth/authenticated-guard.service";
 
 @Controller("pictures")
 export class PicturesController {
@@ -25,6 +27,7 @@ export class PicturesController {
   }
 
   @Post()
+  @UseGuards(AuthenticatedGuard)
   async createPicture(@Body() pictureDto: PictureDto) {
     return this.picturesService.savePicture(pictureDto);
   }
